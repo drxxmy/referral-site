@@ -26,7 +26,7 @@ class User(AbstractBaseUser):
     activated_invite = models.ForeignKey(
         "self", on_delete=models.SET_NULL, null=True, blank=True
     )
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         # Генерация 6-значного инвайт кода
