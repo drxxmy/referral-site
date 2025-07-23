@@ -1,7 +1,11 @@
 import secrets
 import string
 
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 
 
@@ -17,16 +21,20 @@ class UserManager(BaseUserManager):
     def create_superuser(self, phone_number, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
         return self.create_user(phone_number, password, **extra_fields)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=11, unique=True)
     invite_code = models.CharField(max_length=6, unique=True, blank=True)
     activated_invite = models.ForeignKey(
         "self", on_delete=models.SET_NULL, null=True, blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = "phone_number"
     REQUIRED_FIELDS = []
