@@ -28,6 +28,11 @@ class User(AbstractBaseUser):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    USERNAME_FIELD = "phone_number"
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
     def save(self, *args, **kwargs):
         # Генерация 6-значного инвайт кода
         alphabet = string.ascii_letters + string.digits
