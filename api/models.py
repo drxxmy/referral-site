@@ -18,3 +18,10 @@ class User(AbstractBaseUser):
         alphabet = string.ascii_letters + string.digits
         self.invite_code = "".join(secrets.choice(alphabet) for _ in range(6))
         return super().save(*args, **kwargs)
+
+
+class AuthCode(models.Model):
+    phone_number = models.CharField(max_length=11)
+    code = models.CharField(max_length=4)
+    created_at = models.DateField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
