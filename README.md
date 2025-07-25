@@ -1,4 +1,7 @@
 # Реализация реферальной системы на Django
+## Тестирование с помощью Postman
+
+Для удобного тестирования API можно использовать [данную коллекцию Postman](https://drxxmy-5957345.postman.co/workspace/Vladislav's-Workspace~02a601bf-0235-4b1a-80a7-4a7c52fa50ab/collection/47012835-635a47ba-bd9f-43dd-a848-4aa273fed1bf?action=share&source=copy-link&creator=47012835)
 
 ## Описание функционала API
 
